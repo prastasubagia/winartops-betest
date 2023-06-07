@@ -3,12 +3,13 @@ import AccountLoginService from '../Services/AccountLoginService';
 import HTTPStatusCode from '../Constants/HTTPStatusCode';
 import RequestInterface from '../Interfaces/RequestInterface';
 import UserInfoService from '../Services/UserInfoService';
+import ProtectedRoute from '../Middlewares/ProtectedRouteMiddleware';
 
 const accountLoginRouter: Router = Router();
 const accountLoginService = new AccountLoginService();
 const userInfoService = new UserInfoService();
 
-accountLoginRouter.post('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
+accountLoginRouter.post('/', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     req.body.userInfo.createdAt = new Date();
     const newUserInfo = await userInfoService.create(req.body.userInfo);
@@ -26,7 +27,8 @@ accountLoginRouter.post('/', async (req: RequestInterface, res: Response, next: 
   }
 });
 
-accountLoginRouter.get('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
+accountLoginRouter.get('/', ProtectedRoute(),
+  async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await accountLoginService.read());
   } catch (error) {
@@ -44,7 +46,7 @@ accountLoginRouter.get('/get-token', async (req: RequestInterface, res: Response
   }
 });
 
-accountLoginRouter.get('/:id', async (req: RequestInterface, res: Response, next: NextFunction) => {
+accountLoginRouter.get('/:id', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await accountLoginService.readById(req.params.id));
   } catch (error) {
@@ -53,7 +55,7 @@ accountLoginRouter.get('/:id', async (req: RequestInterface, res: Response, next
   }
 });
 
-accountLoginRouter.patch('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
+accountLoginRouter.patch('/', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await accountLoginService.update(req.body));
   } catch (error) {
@@ -62,7 +64,7 @@ accountLoginRouter.patch('/', async (req: RequestInterface, res: Response, next:
   }
 });
 
-accountLoginRouter.delete('/:id', async (req: RequestInterface, res: Response, next: NextFunction) => {
+accountLoginRouter.delete('/:id', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await accountLoginService.delete(req.params.id));
   } catch (error) {

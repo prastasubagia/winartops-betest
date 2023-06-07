@@ -2,11 +2,12 @@ import { NextFunction, Response, Router } from 'express';
 import UserInfoService from '../Services/UserInfoService';
 import RequestInterface from '../Interfaces/RequestInterface';
 import HTTPStatusCode from '../Constants/HTTPStatusCode';
+import ProtectedRoute from '../Middlewares/ProtectedRouteMiddleware';
 
 const userInfoRouter: Router = Router();
 const service = new UserInfoService();
 
-userInfoRouter.post('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
+userInfoRouter.post('/', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await service.create(req.body));
   } catch (error) {
@@ -15,7 +16,7 @@ userInfoRouter.post('/', async (req: RequestInterface, res: Response, next: Next
   }
 });
 
-userInfoRouter.get('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
+userInfoRouter.get('/', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await service.read());
   } catch (error) {
@@ -24,7 +25,7 @@ userInfoRouter.get('/', async (req: RequestInterface, res: Response, next: NextF
   }
 });
 
-userInfoRouter.get('/:id', async (req: RequestInterface, res: Response, next: NextFunction) => {
+userInfoRouter.get('/:id', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await service.readById(req.params.id));
   } catch (error) {
@@ -33,7 +34,7 @@ userInfoRouter.get('/:id', async (req: RequestInterface, res: Response, next: Ne
   }
 });
 
-userInfoRouter.patch('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
+userInfoRouter.patch('/', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await service.update(req.body));
   } catch (error) {
@@ -42,7 +43,7 @@ userInfoRouter.patch('/', async (req: RequestInterface, res: Response, next: Nex
   }
 });
 
-userInfoRouter.delete('/:id', async (req: RequestInterface, res: Response, next: NextFunction) => {
+userInfoRouter.delete('/:id', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await service.delete(req.params.id));
   } catch (error) {

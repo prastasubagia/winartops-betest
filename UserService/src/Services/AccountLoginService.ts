@@ -36,6 +36,6 @@ export default class AccountLoginService {
   }
 
   async getToken() {
-    return generateAccessToken();
+    return { token: generateAccessToken() };
   }
 }
