@@ -2,6 +2,7 @@ import AccountLoginInterface from '../Interfaces/AccountLoginInterface';
 import AccountLoginModel from '../Models/AccountLoginModel';
 import bcrypt from 'bcrypt';
 import UserInfoModel from '../Models/UserInfoModel';
+import generateAccessToken from '../Utilities/GenerateAccessToken';
 
 export default class AccountLoginService {
   async create(accountLogin: AccountLoginInterface) {
@@ -32,5 +33,9 @@ export default class AccountLoginService {
     const accountLogin = await AccountLoginModel.findById(accountLoginId);
     await UserInfoModel.findByIdAndDelete(accountLogin?.userId);
     return await AccountLoginModel.findByIdAndDelete(accountLoginId).select('-password');
+  }
+
+  async getToken() {
+    return generateAccessToken();
   }
 }

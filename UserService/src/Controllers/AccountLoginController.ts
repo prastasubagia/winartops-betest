@@ -35,6 +35,15 @@ accountLoginRouter.get('/', async (req: RequestInterface, res: Response, next: N
   }
 });
 
+accountLoginRouter.get('/get-token', async (req: RequestInterface, res: Response, next: NextFunction) => {
+  try {
+    res.status(HTTPStatusCode.OK).json(await accountLoginService.getToken());
+  } catch (error) {
+    req.error = error;
+    next(error);
+  }
+});
+
 accountLoginRouter.get('/:id', async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await accountLoginService.readById(req.params.id));
