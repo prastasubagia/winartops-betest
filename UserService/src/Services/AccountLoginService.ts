@@ -23,7 +23,6 @@ export default class AccountLoginService {
     const today = new Date();
     const threeDaysEarlier = today.setDate(today.getDate() - 3);
     const result = await AccountLoginModel.find({ lastLoginDateTime: { $gt: threeDaysEarlier } });
-    console.log(result);
     return result.map((accountLogin) => accountLogin.userId);
   }
 
