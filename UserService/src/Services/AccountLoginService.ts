@@ -10,32 +10,25 @@ export default class AccountLoginService {
     return saved.save();
   }
 
-  async read(){
-    const result = await AccountLoginModel
-      .find()
-      .select('-password')
-      .populate('userId');
+  async read() {
+    const result = await AccountLoginModel.find().select('-password').populate('userId');
     return result;
   }
 
-  async readById(accountLoginId: string){
-    const result = await AccountLoginModel
-      .findById(accountLoginId)
-      .select('-password')
-      .populate('userId');
+  async readById(accountLoginId: string) {
+    const result = await AccountLoginModel.findById(accountLoginId).select('-password').populate('userId');
     return result;
   }
 
-  async update(updatedAccountLogin: AccountLoginInterface){
-    const result = await AccountLoginModel.findByIdAndUpdate(
-      { _id: updatedAccountLogin._id }, 
-      updatedAccountLogin, 
-      { new: true, runValidators: true }
-    );
+  async update(updatedAccountLogin: AccountLoginInterface) {
+    const result = await AccountLoginModel.findByIdAndUpdate({ _id: updatedAccountLogin._id }, updatedAccountLogin, {
+      new: true,
+      runValidators: true,
+    });
     return result;
   }
 
-  async delete(accountLoginId: string){
+  async delete(accountLoginId: string) {
     const result = await AccountLoginModel.findOneAndDelete({ _id: accountLoginId });
     return result;
   }

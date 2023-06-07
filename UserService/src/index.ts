@@ -6,13 +6,13 @@ import mongoose, { connect } from 'mongoose';
 import { MONGO_URI } from './Utilities/Config';
 import { error } from 'console';
 
-mongoose.set('strictQuery', true)
+mongoose.set('strictQuery', true);
 // Connect to MongoDB
 connect(`${MONGO_URI}`, {})
-.then(() => {
-  console.log('Connected to MongoDB');
-})
-.catch(error);
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch(error);
 
 const app = express();
 

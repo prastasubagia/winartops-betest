@@ -1,5 +1,5 @@
-import { Schema } from "mongoose";
-import AccountLoginInterface from "../Interfaces/AccountLoginInterface";
+import { Schema } from 'mongoose';
+import AccountLoginInterface from '../Interfaces/AccountLoginInterface';
 
 const schema = new Schema<AccountLoginInterface>({
   userName: {

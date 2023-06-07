@@ -1,8 +1,8 @@
-import { Response, NextFunction, Router } from "express";
-import AccountLoginService from "../Services/AccountLoginService";
-import HTTPStatusCode from "../Constants/HTTPStatusCode";
-import RequestInterface from "../Interfaces/RequestInterface";
-import UserInfoService from "../Services/UserInfoService";
+import { Response, NextFunction, Router } from 'express';
+import AccountLoginService from '../Services/AccountLoginService';
+import HTTPStatusCode from '../Constants/HTTPStatusCode';
+import RequestInterface from '../Interfaces/RequestInterface';
+import UserInfoService from '../Services/UserInfoService';
 
 const accountLoginRouter: Router = Router();
 const accountLoginService = new AccountLoginService();
@@ -12,13 +12,13 @@ accountLoginRouter.post('/', async (req: RequestInterface, res: Response, next: 
   try {
     const newUserInfo = await userInfoService.create({
       createdAt: new Date(),
-      ...req.body.userInfo
+      ...req.body.userInfo,
     });
     let newAccountLogin = req.body.accountLogin;
     newAccountLogin = {
       userId: newUserInfo._id,
-      ...newAccountLogin
-    }
+      ...newAccountLogin,
+    };
     newAccountLogin = await accountLoginService.create(newAccountLogin);
     newAccountLogin.password = '';
     res.status(HTTPStatusCode.OK).json(newAccountLogin);
@@ -26,7 +26,7 @@ accountLoginRouter.post('/', async (req: RequestInterface, res: Response, next: 
     req.error;
     next(error);
   }
-})
+});
 
 accountLoginRouter.get('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {

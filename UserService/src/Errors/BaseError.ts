@@ -1,4 +1,4 @@
-import HTTPStatusCode from "../Constants/HTTPStatusCode";
+import HTTPStatusCode from '../Constants/HTTPStatusCode';
 
 export default class BaseError extends Error {
   public readonly name: string;
@@ -14,6 +14,6 @@ export default class BaseError extends Error {
     this.httpCode = httpCode;
     this.isOperational = isOperational;
 
-    Error.captureStackTrace(this)
+    Error.captureStackTrace(this);
   }
 }

@@ -1,5 +1,5 @@
-import { Schema } from "mongoose";
-import UserInfoInterface from "../Interfaces/UserInfoInterface";
+import { Schema } from 'mongoose';
+import UserInfoInterface from '../Interfaces/UserInfoInterface';
 
 const schema = new Schema<UserInfoInterface>({
   fullName: {

@@ -17,20 +17,20 @@ userInfoRouter.post('/', async (req: RequestInterface, res: Response, next: Next
 
 userInfoRouter.get('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
-    res.status(HTTPStatusCode.OK).json(await service.read());  
+    res.status(HTTPStatusCode.OK).json(await service.read());
   } catch (error) {
     req.error = error;
     next(error);
   }
 });
 
-userInfoRouter.get('/:id',async (req: RequestInterface, res: Response, next: NextFunction) => {
+userInfoRouter.get('/:id', async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await service.readById(req.params.id));
   } catch (error) {
     req.error = error;
     next(error);
-  }  
+  }
 });
 
 userInfoRouter.patch('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
@@ -40,4 +40,4 @@ userInfoRouter.patch('/', async (req: RequestInterface, res: Response, next: Nex
     req.error = error;
     next(error);
   }
-})
+});
