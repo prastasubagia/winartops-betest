@@ -29,7 +29,7 @@ MockResponse.prototype.setHeader = function (this: any, name: any, value: any) {
   this.headers[name.toLowerCase()] = value;
 };
 
-// Request = MockRequest;
-// Response = MockResponse;
+Request = MockRequest;
+Response = MockResponse;
 
-export { MockRequest, MockResponse };
+export { Request, Response };

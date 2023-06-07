@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import AccountLoginInterface from '../Interfaces/AccountLoginInterface';
 import { SECRET, SYMMETRIC_ALGO, TOKEN_ISSUER, TOKEN_EXPIRES_IN } from './Config';
 
 const generateAccessToken = (): string => {
