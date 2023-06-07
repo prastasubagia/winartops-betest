@@ -3,30 +3,26 @@ import UserInfoModel from '../Models/UserInfoModel';
 
 export default class UserInfoService {
   async create(userInfo: UserInfoInterface) {
-    const saved = new UserInfoModel(userInfo);
-    return saved.save();
+    userInfo.createdAt = new Date();
+    return await UserInfoModel.create(userInfo);
   }
 
   async read() {
-    const result = await UserInfoModel.find();
-    return result;
+    return await UserInfoModel.find();
   }
 
   async readById(userInfoId: string) {
-    const result = await UserInfoModel.findById(userInfoId);
-    return result;
+    return await UserInfoModel.findById(userInfoId);
   }
 
   async update(updatedUserInfo: UserInfoInterface) {
-    const result = await UserInfoModel.findByIdAndUpdate({ _id: updatedUserInfo._id }, updatedUserInfo, {
+    return await UserInfoModel.findByIdAndUpdate(updatedUserInfo._id, updatedUserInfo, {
       new: true,
       runValidators: true,
     });
-    return result;
   }
 
   async delete(userInfoId: string) {
-    const result = await UserInfoModel.findOneAndDelete({ _id: userInfoId });
-    return result;
+    return await UserInfoModel.findByIdAndDelete(userInfoId);
   }
 }

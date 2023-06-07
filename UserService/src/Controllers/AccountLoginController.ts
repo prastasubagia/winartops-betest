@@ -10,16 +10,14 @@ const userInfoService = new UserInfoService();
 
 accountLoginRouter.post('/', async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
-    const newUserInfo = await userInfoService.create({
+    req.body.userInfo.createdAt = new Date();
+    const newUserInfo = await userInfoService.create(req.body.userInfo);
+    req.body.accountLogin = {
       createdAt: new Date(),
-      ...req.body.userInfo,
-    });
-    let newAccountLogin = req.body.accountLogin;
-    newAccountLogin = {
       userId: newUserInfo._id,
-      ...newAccountLogin,
+      ...req.body.accountLogin,
     };
-    newAccountLogin = await accountLoginService.create(newAccountLogin);
+    const newAccountLogin = await accountLoginService.create(req.body.accountLogin);
     newAccountLogin.password = '';
     res.status(HTTPStatusCode.OK).json(newAccountLogin);
   } catch (error) {

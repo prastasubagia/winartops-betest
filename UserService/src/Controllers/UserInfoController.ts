@@ -41,3 +41,14 @@ userInfoRouter.patch('/', async (req: RequestInterface, res: Response, next: Nex
     next(error);
   }
 });
+
+userInfoRouter.delete('/:id', async (req: RequestInterface, res: Response, next: NextFunction) => {
+  try {
+    res.status(HTTPStatusCode.OK).json(await service.delete(req.params.id));
+  } catch (error) {
+    req.error = error;
+    next(error);
+  }
+});
+
+export default userInfoRouter;
