@@ -1,3 +1,4 @@
 data/
-data-renamed/
+dist/
+coverage/
 node_modules/

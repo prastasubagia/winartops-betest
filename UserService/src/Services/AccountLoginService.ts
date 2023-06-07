@@ -19,6 +19,14 @@ export default class AccountLoginService {
     return await AccountLoginModel.findById(accountLoginId).select('-password').populate('userId');
   }
 
+  async readLessThanThreeDaysLoginIds() {
+    const today = new Date();
+    const threeDaysEarlier = today.setDate(today.getDate() - 3);
+    const result = await AccountLoginModel.find({ lastLoginDateTime: { $gt: threeDaysEarlier } });
+    console.log(result);
+    return result.map((accountLogin) => accountLogin.userId);
+  }
+
   async update(updatedAccountLogin: AccountLoginInterface) {
     updatedAccountLogin.updatedAt = new Date();
     return await AccountLoginModel.findByIdAndUpdate(updatedAccountLogin._id, updatedAccountLogin, {

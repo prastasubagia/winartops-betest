@@ -7,7 +7,7 @@ const AuthenticationMiddleware = (app: Express) => {
   const authStrategy = new JwtStrategy(
     {
       secretOrKey: SECRET,
-      algorithms: [SYMMETRIC_ALGO!],
+      algorithms: [SYMMETRIC_ALGO],
       issuer: TOKEN_ISSUER,
       ignoreExpiration: false,
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

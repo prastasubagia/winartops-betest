@@ -1,3 +1,4 @@
+import QueryInterface from '../Interfaces/QueryInterface';
 import UserInfoInterface from '../Interfaces/UserInfoInterface';
 import UserInfoModel from '../Models/UserInfoModel';
 
@@ -13,6 +14,14 @@ export default class UserInfoService {
 
   async readById(userInfoId: string) {
     return await UserInfoModel.findById(userInfoId);
+  }
+
+  async readBy(filter: QueryInterface) {
+    return await UserInfoModel.find(filter);
+  }
+
+  async readOneBy(filter: QueryInterface) {
+    return await UserInfoModel.findOne(filter);
   }
 
   async update(updatedUserInfo: UserInfoInterface) {
