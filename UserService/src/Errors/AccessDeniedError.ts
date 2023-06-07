@@ -1,8 +1,8 @@
-import HTTPStatusCode from "../Constants/HTTPStatusCode"
-import BaseError from "./BaseError"
+import HTTPStatusCode from '../Constants/HTTPStatusCode';
+import BaseError from './BaseError';
 
 export default class AccessDeniedError extends BaseError {
-    constructor(description: string = 'Access Denied') {
-        super('FORBIDDEN', HTTPStatusCode.FORBIDDEN, description, true)
-    }
+  constructor(description: string = 'Access Denied') {
+    super('FORBIDDEN', HTTPStatusCode.FORBIDDEN, description, true);
+  }
 }

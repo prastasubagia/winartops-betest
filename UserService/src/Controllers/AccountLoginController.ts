@@ -27,8 +27,7 @@ accountLoginRouter.post('/', ProtectedRoute(), async (req: RequestInterface, res
   }
 });
 
-accountLoginRouter.get('/', ProtectedRoute(),
-  async (req: RequestInterface, res: Response, next: NextFunction) => {
+accountLoginRouter.get('/', ProtectedRoute(), async (req: RequestInterface, res: Response, next: NextFunction) => {
   try {
     res.status(HTTPStatusCode.OK).json(await accountLoginService.read());
   } catch (error) {

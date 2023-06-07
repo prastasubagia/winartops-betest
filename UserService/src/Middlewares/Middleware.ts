@@ -1,8 +1,8 @@
-import { Express } from "express"
-import CommonMiddleware from "./CommonMiddleware"
+import { Express } from 'express';
+import CommonMiddleware from './CommonMiddleware';
 
 const Middleware = (app: Express) => {
-    CommonMiddleware(app)
-}
+  CommonMiddleware(app);
+};
 
-export default Middleware
+export default Middleware;
